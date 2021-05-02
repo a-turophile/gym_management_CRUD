@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <form action="" method = 'post' autocomplete="off" enctype="multipart/form-data" >
+    {% csrf_token %}
+        {{ form.name|as_crispy_field}}
+        {{ form.email|as_crispy_field}}
+        {{ form.address|as_crispy_field}}
+        <label>Gender*</label>
+        {{ form.gender}}
+        {{ form.weight|as_crispy_field }}
+        <label>Activities to opt: </label>
+        {{ form.yoga|as_crispy_field}}
+        {{ form.aerobics|as_crispy_field }}
+        {{ form.weight_training|as_crispy_field }}
+        {{ form.cardio|as_crispy_field}}
+        {{ form.timing|as_crispy_field }}
+        <br>
+        <label>Upload Aadhar Card</label>
+        <br>
+        {{ form.aadhar }}
+
+
+
+        <div class = 'row'>
+            <div class = 'col-md-8'>
+        <button type="submit" class="btn btn-success btn-block btn-lg"><i class=" fas fa-database"></i>Submit</button>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'gym:member_show' %}" class="btn btn-secondary btn-block btn-lg">
+                    <i class = 'fas fa-stream'></i>Show list
+                </a>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

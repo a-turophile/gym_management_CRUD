@@ -1,0 +1,43 @@
+{% extends "base.html"%}
+
+
+{% block content %}
+
+    <table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+    <tr>
+        <td>Name</td>
+        <td>E-mail</td>
+        <td>Timing</td>
+        <td>Aadhar</td>
+        <td>
+            <a href="{% url 'gym:member_insert' %}" class="btn btn-outline-success">
+                <i class = 'fas fa-plus'></i> Register
+            </a>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for member in members_list %}
+        <tr>
+        <td>{{ member.name }}</td>
+        <td>{{ member.email }}</td>
+        <td>{{ member.timing }}</td>
+        <td><img src = "{{ member.aadhar.url }}" height="50" width="50"></td>
+        <td>
+            <a href="{% url 'gym:member_update' member.id %}" class="btn text-secondary px-0">
+                <i class="far fa-edit fa-lg"></i>
+            </a>
+            <form action="{% url 'gym:member_delete' member.id %}" method="post" class = 'd-inline'>
+                {% csrf_token %}
+                <button type="submit" class="btn">
+                    <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                </button>
+            </form>
+
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock content %}
